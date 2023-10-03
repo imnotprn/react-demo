@@ -4,7 +4,7 @@ import classes from "./Greeting.module.css";
 interface iGreeting {
   name: string;
   greetingMsg: string;
-  isLoggedIn: string;
+  isLoggedIn: boolean;
 }
 
 const Greeting = ({ name, isLoggedIn }: iGreeting) => {
