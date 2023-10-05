@@ -2,7 +2,7 @@
   height: auto;
   width: 100%;
   background-color: white;
-  box-shadow: 0 0 10px 5px rgb(0 0 0/0.1);
+  box-shadow: 0 0 10px 5px rgb(0 0 0 / 0.1);
   padding: 20px 16px;
   box-sizing: border-box;
 
@@ -11,15 +11,16 @@
   align-items: center;
 }
 
-.login {
-  background-color: white;
-  padding: 8px 10px;
-  box-sizing: border-box;
-  border: none;
-  border-radius: 6px;
+.menu {
+  display: flex;
+  gap: 16px;
+  align-items: center;
 }
 
-.login:hover {
-  background-color: grey;
-  cursor: pointer;
+.inactive {
+  text-decoration: none;
+}
+
+.active {
+  color: blue;
 }
