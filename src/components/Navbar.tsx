@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 
@@ -32,7 +33,9 @@ const Navbar = () => {
         >
           Create
         </NavLink>
-        <button className={classes.login}>Login</button>
+        <Link to="/login" className={classes.login}>
+          Login
+        </Link>
       </div>
     </nav>
   );
