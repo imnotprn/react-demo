@@ -8,7 +8,9 @@ interface IAuthProviderProps {
 
 interface IAuthContextType {
   isLoggedIn: boolean;
+  username: string | null;
   login: (username: string, password: string) => Promise<void>;
+  logout: () => void;
 }
 
 const AuthContext = createContext<IAuthContextType | null>(null);
@@ -22,9 +24,11 @@ export const useAuth = () => {
 };
 
 const token = localStorage.getItem("token");
+const user = localStorage.getItem("username");
 
 const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [isLoggedIn, setIsLoggedin] = useState<boolean>(!!token);
+  const [username, setUsername] = useState<string | null>(user);
 
   const login = async (username: string, password: string) => {
     const loginBody: LoginDTO = { username, password };
@@ -39,14 +43,21 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       );
 
       localStorage.setItem("token", res.data.accessToken);
+      localStorage.setItem("username", username);
       setIsLoggedin(true);
     } catch (err) {
       throw new Error("Invalid username or password");
     }
   };
 
+  const logout = () => {
+    localStorage.clear();
+    setIsLoggedin(false);
+    setUsername(null);
+  };
+
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login }}>
+    <AuthContext.Provider value={{ isLoggedIn, username, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
